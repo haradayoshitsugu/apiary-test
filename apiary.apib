@@ -277,49 +277,26 @@ HOST: https://api.tokyometroapp.jp/api/v2/
 ### Response [POST]
 + Request (application/json)
 
-            {
-                "@id": "urn:ucode:_00001C000000000000010000030C46CD",
-                "@type": "odpt.Station",
-                "owl:sameAs": "odpt.Station:TokyoMetro.Hibiya.Ueno",
-                "dc:date": "2014-09-03T11:39:51+09:00",
-                "dc:title": "上野",
-                "ug:region": "https://api.tokyometroapp.jp/api/v2/places/urn:ucode:_00001C000000000000010000030C46CD.geojson",
-                "odpt:operator": "odpt.Operator:TokyoMetro",
-                "odpt:railway": "odpt.Railway:TokyoMetro.Hibiya",
-                "odpt:connectingRailway": [
-                  "odpt.Railway:JR-East.Yamanote",
-                  "odpt.Railway:JR-East.Utsunomiya",
-                  "odpt.Railway:JR-East.Joban",
-                  "odpt.Railway:JR-East.Takasaki",
-                  "odpt.Railway:JR-East.KeihinTohoku",
-                  "odpt.Railway:TokyoMetro.Ginza",
-                  "odpt.Railway:Keisei.KeiseiMain"
-                ],
-                "odpt:facility": "odpt.StationFacility:TokyoMetro.Ueno",
-                "odpt:passengerSurvey": [
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2013",
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2012",
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2011"
-                ],
-                "odpt:stationCode": "H17",
-                "odpt:exit": [
-                  "urn:ucode:_00001C000000000000010000030C40B4",
-                  "urn:ucode:_00001C000000000000010000030C40B5",
-                  "urn:ucode:_00001C000000000000010000030C41F9",
-                  "urn:ucode:_00001C000000000000010000030C41FA",
-                  "urn:ucode:_00001C000000000000010000030C41FB",
-                  "urn:ucode:_00001C000000000000010000030C41FC",
-                  "urn:ucode:_00001C000000000000010000030C41FD",
-                  "urn:ucode:_00001C000000000000010000030C41FE",
-                  "urn:ucode:_00001C000000000000010000030C4466",
-                  "urn:ucode:_00001C000000000000010000030C4467",
-                  "urn:ucode:_00001C000000000000010000030C4468",
-                  "urn:ucode:_00001C000000000000010000030C4469",
-                  "urn:ucode:_00001C000000000000010000030C446A",
-                  "urn:ucode:_00001C000000000000010000030C446B",
-                ],
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_Station.jsonld"
-              }
+          {
+            "@context": "http://vocab.tokyometroapp.jp/context_odpt_train.jsonld",
+            "@type": "odpt:Train",
+            "@id": "urn:ucode:_00001C000000000000010000030C4D61",
+            "dc:date": "2014-09-08T20:53:51+09:00",
+            "dct:valid": "2014-09-08T20:54:51+09:00",
+            "odpt:frequency": 60,
+            "odpt:railway": "odpt.Railway:TokyoMetro.Chiyoda",
+            "owl:sameAs": "odpt.Train:TokyoMetro.Chiyoda.A2098S4",
+            "odpt:trainNumber": "A2098S4",
+            "odpt:trainType": "odpt.TrainType:TokyoMetro.Local",
+            "odpt:delay": 0,
+            "odpt:startingStation": "odpt.Station:TokyoMetro.Chiyoda.KitaAyase",
+            "odpt:terminalStation": "odpt.Station:TokyoMetro.Chiyoda.Ayase",
+            "odpt:fromStation": "odpt.Station:TokyoMetro.Chiyoda.KitaAyase",
+            "odpt:toStation": null,
+            "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Ayase",
+            "odpt:trainOwner": "odpt.TrainOwner:TokyoMetro"
+          }
+
 
 + Response 201 (application/json)
 
