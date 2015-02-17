@@ -1,0 +1,51 @@
+FORMAT: 1A
+HOST: http://houkago.candy.am/
+
+# hello-api
+こんにちは、ここはAPIです。
+ゆっくり楽しんで行ってください。
+
+# Group Hello API
+ここからは Hello API の説明です。
+
+## 部活詳細 [/api/community/{id}]
+
++ Parameters
+    + id                    (required) ... 部活ID
+
+### 取得 [GET]
++ Response 200 (application/json)
+
+        {
+            "communityId": "54e1eb016c62373551000027",
+            "communityTitle": "モックモックモックモック",
+            "communityPic": "stat.ameba.jp/user_images/20150216/21/solong49/40/fc/j/o0600033613220299832.jpg",
+            "userCount": 1,
+            "incr": null, // null の場合、0 と同じ扱い
+            "linkUrl": "http://houkago.candy.am/community/top/54e1eb016c62373551000027"
+        }
+
+## 部活詳細 [/api/community]
+
+### 追加 [POST]
++ Request (application/json)
+
+        {
+            "name": "tanosii tanosii !",
+            "description": "chou tanosii chou tanosii !"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "id": "111-222-333"
+        }
+
+### 更新[PUT]
++ Request (application/json)
+
+        { "title": "Buy cheese and bread for breakfast." }
+
++ Response 201 (application/json)
+
+        { "id": 3, "title": "Buy cheese and bread for breakfast." }
