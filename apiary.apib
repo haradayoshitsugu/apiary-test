@@ -44,32 +44,6 @@ HOST: https://api.tokyometroapp.jp/api/v2/
 
 
 ### Response [GET]
-#### Response Params
-
-odpt:StationTimetable プロパティ        | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------------------------------------------------                                                                | -----
-@context                                | URL                                | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                                     | URN                                | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                                   | odpt:StationTimetable              | クラス指定                                                                                                                                                                                    | ◯
-owl:sameAs                              | URL                                | 固有識別子。命名ルールは、odpt.StationTimetable:TokyoMetro.路線名.駅名.方面名 である。                                                                                                        | ◯
-dc:date                                 | xsd:dateTime                       | データ生成時刻、e.g. 2013–01–13T15:10:00+09:00、ISO8601日付時刻形式                                                                                                                         | ◯
-odpt:station                            | odpt:Station                       | 駅                                                                                                                                                                                            | ◯
-odpt:railway                            | odpt:Railway                       | 路線                                                                                                                                                                                          | ◯
-odpt:operator                           | odpt:Operator                      | 運行会社                                                                                                                                                                                      | ◯
-odpt:railDirection                      | odpt:RailDirection                 | 方面                                                                                                                                                                                          | ◯
-odpt:weekdays                           | Array(odpt:StationTimetableObject) | 平日（出発時間、行き先駅名等の組のリストを格納）                                                                                                                                              |
-odpt:saturdays                          | Array(odpt:StationTimetableObject) | 土曜日（出発時間、行き先駅名等の組のリストを格納）                                                                                                                                            |
-odpt:holidays                           | Array(odpt:StationTimetableObject) | 休日（出発時間、行き先駅名等の組のリストを格納）                                                                                                                                              |
-
-odpt:StationTimetableObject::プロパティ | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------------------------------------------------                                                                | -----
-odpt:departureTime                      | odpt:Time                          | 出発時間 (ISO8601時刻形式, e.g. 05:09)                                                                                                                                                        | ◯
-odpt:destinationStation                 | odpt:Station                       | 行き先駅                                                                                                                                                                                      | ◯
-odpt:trainType                          | odpt:TrainType                     | 列車種別。各停(odpt.TrainType:Local)、急行(odpt.TrainType:Express)、快速(odpt.TrainType:Rapid)、特急(odpt.TrainType:LimitedExpress)など。                                                     | ◯
-odpt:isLast                             | xsd:boolean                        | 最終電車の場合、true。最終電車でない場合は省略。                                                                                                                                              |
-odpt:isOrigin                           | xsd:boolean                        | 始発駅の場合、true。始発駅ではない場合は省略。                                                                                                                                                |
-odpt:carComposition                     | xsd:integer                        | 車両数（駅に停車する車両数が列車毎に異なる場合に格納される）。                                                                                                                                |
-odpt:note                               | xsd:string                         | その他の注釈（接続、通過待ちなど）。                                                                                                                                                          |
 
 + Response 200 (application/json)
     + Body
@@ -135,20 +109,6 @@ odpt:note                               | xsd:string                         | �
     + odpt%3AtrainInformationText   (optional, xsd:string           , `optional`) ... 運行情報テキスト
 
 ### Response [GET]
-#### Response Params
-
-Properties                              | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------------------------------------------------                                                                | -----
-@context                                | URL                                | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                                     | URN                                | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                                   | odpt:TrainInformation              | クラス指定                                                                                                                                                                                    | ◯
-dc:date                                 | xsd:dateTime                       | データ生成時刻、e.g. 2013–01–13T15:10:00+09:00、ISO8601 日付時刻形式                                                                                                                        | ◯
-dct:valid                               | xsd:dateTime                       | 有効期限（ISO8601 日付時刻形式）                                                                                                                                                              | ◯
-odpt:operator                           | odpt:Operator                      | 運行会社                                                                                                                                                                                      | ◯
-odpt:timeOfOrigin                       | xsd:dateTime                       | 発生時刻（ISO8601 日付時刻形式）                                                                                                                                                              | ◯
-odpt:railway                            | odpt:Railway                       | 発生路線                                                                                                                                                                                      | ◯
-odpt:trainInformationStatus             | xsd:string                         | 平常時は省略。運行情報が存在する場合は「運行情報あり」を格納。遅延などの情報を取得可能な場合は、「遅延」等のテキストを格納。                                                                  |
-odpt:trainInformationText               | xsd:string                         | 運行情報テキスト                                                                                                                                                                              | ◯
 
 + Response 200 (application/json)
     + Body
@@ -201,27 +161,6 @@ odpt:trainInformationText               | xsd:string                         | �
 
 
 ### Response [GET]
-#### Response Params
-
-Properties                              | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------------------------------------------------                                                                | -----
-@context                                | URL                                | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                                     | URN                                | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                                   | odpt:Train                         | クラス指定                                                                                                                                                                                    | ◯
-owl:sameAs                              | URL                                | 固有識別子。命名ルールは、odpt.Train:TokyoMetro.路線名.列車番号である。                                                                                                                       | ◯
-odpt:trainNumber                        | xsd:string                         | 列車番号                                                                                                                                                                                      | ◯
-odpt:trainType                          | odpt:TrainType                     | 列車種別。各停(odpt.TrainType:Local)、急行(odpt.TrainType:Express)、快速(odpt.TrainType:Rapid)、特急(odpt.TrainType:LimitedExpress)など。                                                     | ◯
-dc:date                                 | xsd:dateTime                       | データ生成時刻、e.g. 2013–01–13T15:10:00+09:00、ISO8601 日付時刻形式                                                                                                                        | ◯
-dct:valid                               | xsd:dateTime                       | データ保証期限、e.g. 2013–01–13T15:10:00+09:00、ISO8601 日付時刻形式                                                                                                                        | ◯
-odpt:frequency                          | xsd:integer                        | 更新頻度（秒）、指定された秒数以降にリクエストを行うことで、最新値が取得される                                                                                                                | ◯
-odpt:railway                            | odpt:Railway                       | 鉄道路線ID                                                                                                                                                                                    | ◯
-odpt:trainOwner                         | odpt:TrainOwner                    | 車両の所属会社                                                                                                                                                                                | ◯
-odpt:railDirection                      | odpt:RailDirection                 | 方面（渋谷方面行きを表すodpt.RailDirection:TokyoMetro.Shibuyaなど）                                                                                                                           | ◯
-odpt:delay                              | xsd:integer                        | 遅延時間（秒）。5分未満は切り捨て。                                                                                                                                                           | ◯
-odpt:startingStation                    | odpt:Station                       | 列車の始発駅                                                                                                                                                                                  | ◯
-odpt:terminalStation                    | odpt:Station                       | 列車の終着駅                                                                                                                                                                                  | ◯
-odpt:fromStation                        | odpt:Station                       | 列車が出発した駅                                                                                                                                                                              | ◯
-odpt:toStation                          | odpt:Station                       | 列車が向かっている駅                                                                                                                                                                          |
 
 + Response 200 (application/json)
     + Body
@@ -281,26 +220,6 @@ odpt:toStation                          | odpt:Station                       | �
     + odpt%3AstationCode (xsd:string                , `optional`) ... 駅コード
 
 ### Response [GET]
-#### Response Params
-
-Properties                              | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------                                                                                                          | -----
-@context                                | URL                                | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                                     | URN                                | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                                   | odpt:Station                       | 地物のクラス名、odpt:Station                                                                                                                                                                  | ◯
-owl:sameAs                              | URL                                | 固有識別子。命名ルールは、odpt.Station:TokyoMetro.路線名.駅名である。                                                                                                                         | ◯
-dc:title                                | xsd:string                         | 駅名                                                                                                                                                                                          | ◯
-dc:date                                 | xsd:dateTime                       | 駅情報の生成時刻(ISO8601 日付時刻形式)                                                                                                                                                        |
-geo:long                                | xsd:double                         | 代表点の経度、10進表記                                                                                                                                                                        |
-geo:lat                                 | xsd:double                         | 代表点の緯度、10進表記                                                                                                                                                                        |
-ug:region                               | odpt:GeoDocument                   | 駅代表点のデータをgeojsonで取得するためのURL。取得にはアクセストークンの付与が必要。                                                                                                          |
-odpt:operator                           | odpt:Operator                      | 管理会社                                                                                                                                                                                      | ◯
-odpt:railway                            | odpt:Railway                       | 路線                                                                                                                                                                                          | ◯
-odpt:connectingRailway                  | Array(odpt:Railway)                | 乗り換え可能路線の一覧                                                                                                                                                                        |
-odpt:facility                           | Array(odpt:StationFacility)        | 駅施設を表すオブジェクトのURI                                                                                                                                                                 | ◯
-odpt:passengerSurvey                    | Array(odpt:PassengerSurvey)        | 駅乗降人員数を表すオブジェクトへのリンク                                                                                                                                                      | ◯
-odpt:stationCode                        | xsd:string                         | 駅コード                                                                                                                                                                                      | ◯
-odpt:exit                               | Array(ug:Poi)                      | 駅出入口を表すオブジェクトへのリンク                                                                                                                                                          | ◯
 
 + Response 200 (application/json)
     + Body
@@ -361,39 +280,6 @@ odpt:exit                               | Array(ug:Poi)                      | �
     + owl%3AsameAs                  (optional, URL                  , `optional`) ... 固有識別子。命名ルールは、odpt.StationFacility:TokyoMetro.駅名 である。
 
 ### Response [GET]
-#### Response Params
-
-第1階層                  | 第2階層                  | 第3階層                | 値域                   | 説明                                                                                                                                                                                          | 必須
--------------------------|--------------------------|------------------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------
-@context                 |                          |                        | URL                    | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                      |                          |                        | URN                    | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                    |                          |                        | odpt:StationFacility   | 駅施設情報を表すクラスのodpt:StationFacility                                                                                                                                                  | ◯
-owl:sameAs               |                          |                        | URL                    | 固有識別子。命名ルールは、odpt.StationFacility:TokyoMetro.駅名 である。                                                                                                                       | ◯
-odpt:barrierfreeFacility |                          |                        | Array(ug:SpatialThing) | 駅の施設一覧                                                                                                                                                                                  |
-                         | @id                      |                        | URN                    | 固有識別子(ucode)。一つの施設に複数の別のIDが割り当てられる場合がある                                                                                                                         |
-                         | @type                    |                        |                        | バリアフリー施設を表すクラス（"ug:Toilet", "spac:Stairlift", "ug:Elevator", "ug:Escalator", "ug:Link"）                                                                                       |
-                         | owl:sameAs               |                        | URL                    | 固有識別子. 命名ルールはodpt.Facility:TokyoMetro.路線名.駅名.改札の内外.カテゴリ名.通し番号 である。                                                                                          |
-                         | ugsrv:categoryName       |                        | xsd:string             | 施設のカテゴリ名（トイレ、階段昇降機、エレベータ、エスカレータ、ハンドル型電動車いす利用可能経路）                                                                                            |
-                         | odpt:serviceDetail       |                        | Array                  | 施設情報の詳細                                                                                                                                                                                |
-                         |                          | ugsrv:serviceStartTime | xsd:string             | 施設の利用可能開始時間（いつでも利用できる場合は省略）。基本的にはISO8601時刻形式（05:30など）であるが、「始発」と入る場合もある。                                                            |
-                         |                          | ugsrv:serviceEndTime   | xsd:string             | 施設の利用可能終了時間（いつでも利用できる場合は省略）。基本的にはISO8601時刻形式（23:50など）であるが、「終車時」と入る場合もある。                                                          |
-                         |                          | odpt:operationDay      | xsd:string             | 施設利用可能時間やエスカレータの方向が曜日によって変わる場合に、次のいずれかを格納（曜日に依存しない場合は省略） Weekday, Sunday, Monday, Tuesday Wednesday Thursday Friday Saturday, Holiday |
-                         |                          | ug:direction           | xsd:string             | エスカレータの方向名（施設がエスカレータの場合に格納。上り、下り、上り・下りの3種類が存在）                                                                                                   |
-                         | odpt:placeName           |                        | xsd:string             | 施設の設置されている場所の名前                                                                                                                                                                |
-                         | odpt:locatedAreaName     |                        | xsd:string             | 施設の設置場所（改札内／改札外）                                                                                                                                                              |
-                         | ugsrv:remark             |                        | xsd:string             | 補足事項                                                                                                                                                                                      |
-                         | spac:hasAssistant        |                        | spac:Assistant         | トイレ内のバリアフリー施設を記述。 "spac:WheelchairAssessible", "ug:BabyChangingTable", "spac:Ostomate" が格納される。                                                                        |
-                         | spac:isAvailableTo       |                        | spac:MoverType         | ハンドル型電動車いす利用可能経路の場合は"spac:MobilityScooter" が格納される。車いす対応エスカレータの場合は"spac:Wheelchair"が格納される。                                                    |
-odpt:platformInformation |                          |                        | Array                  | プラットフォームに車両が停車している時の、車両毎の最寄りの施設・出口等の情報を記述                                                                                                            | ◯
-                         | odpt:carComposition      |                        | xsd:integer            | 車両編成数                                                                                                                                                                                    | ◯
-                         | odpt:carNumber           |                        | xsd:integer            | 車両の号車番号                                                                                                                                                                                | ◯
-                         | odpt:railDirection       |                        | odpt:RailDirection     | プラットフォームに停車する列車の方面                                                                                                                                                          | ◯
-                         | odpt:transferInformation |                        | Array                  | 最寄りの乗り換え可能な路線と所要時間                                                                                                                                                          |
-                         |                          | odpt:railway           | odpt:Railway           | 乗り換え可能路線                                                                                                                                                                              |
-                         |                          | odpt:railDirection     | odpt:RailDirection     | 乗り換え可能路線の方面。乗り換え可能な方面を特記する必要がある場合にのみ記載。                                                                                                                |
-                         |                          | odpt:necessaryTime     | xsd:integer            | 所要時間（分）                                                                                                                                                                                |
-                         | odpt:barrierfreeFacility |                        | Array(ug:StatialThing) | 最寄りのバリアフリー施設                                                                                                                                                                      |
-                         | odpt:surroundingArea     |                        | Array(xsd:string)      | 改札外の最寄り施設                                                                                                                                                                            |
 
 + Response 200 (application/json)
     + Body
@@ -509,17 +395,6 @@ odpt:platformInformation |                          |                        | A
     + odpt%3AsurveyYear             (optional, xsd:integer          , `optional`) ... 調査年度
 
 ### Response [GET]
-#### Response Params
-
-Properties                              | 値域                               | 説明                                                                                                                                                                                          | 必須
-----------------------------            | -----------------------            | ------------------------------------------------------------------------------------------------------------------------------                                                                | -----
-@context                                | URL                                | JSON-LD仕様に基づく @context のURL                                                                                                                                                            | ◯
-@id                                     | URN                                | 固有識別子(ucode)                                                                                                                                                                             | ◯
-@type                                   | odpt:PassengerSurvey               | クラス名、odpt:PassengerSurvey                                                                                                                                                                | ◯
-owl:sameAs                              | URL                                | 固有識別子。 命名ルールは odpt.PassengerSurvey:TokyoMetro.駅名.調査年 である。e.g. odpt:PassengerSurvey:TokyoMetro.Tokyo.2013                                                                 | ◯
-odpt:operator                           | odpt:Operator                      | 運行会社                                                                                                                                                                                      | ◯
-odpt:surveyYear                         | xsd:integer                        | 調査年度                                                                                                                                                                                      | ◯
-odpt:passengerJourneys                  | xsd:integer                        | 駅の1日あたりの平均乗降人員数                                                                                                                                                                 | ◯
 
 + Response 200 (application/json)
     + Body
@@ -549,33 +424,6 @@ odpt:passengerJourneys                  | xsd:integer                        | �
     + odpt%3AlineCode   (optional, xsd:string       , `optional`) ... 路線コード
 
 ### Response [GET]
-#### Response Params
-
-第1階層                                 | 第2階層                            | 値域                      | 説明                                                                                  | 必須
-----------------------------------------|------------------------------------|---------------------------|---------------------------------------------------------------------------------------|---
-@context                                |                                    | URL                       | JSON-LD仕様に基づく @context のURL                                                    | ◯
-@id                                     |                                    | URN                       | 固有識別子(ucode)。支線には別IDを割り当てる                                           | ◯
-@type                                   |                                    | odpt:Railway              | 地物のクラス名、odpt:Railway                                                          | ◯
-owl:sameAs                              |                                    | URL                       | 固有識別子。命名ルールは、odpt.Railway:TokyoMetro.路線名 である。                     | ◯
-dc:title                                |                                    | xsd:string                | 運行系統名                                                                            | ◯
-ug:region                               |                                    | odpt:GeoDocument          | 路線形状データをGeojsonで取得するためのURL。取得時にはアクセストークンの付与が必要。  | ◯
-odpt:operator                           |                                    | odpt:Operator             | 運行会社                                                                              | ◯
-odpt:stationOrder                       |                                    | Array                     | 駅の順序                                                                              | ◯
-                                        | odpt:station                       | odpt:Station              | 駅                                                                                    | ◯
-                                        | odpt:index                         | xsd:integer               | 駅の順序                                                                              | ◯
-odpt:travelTime                         |                                    | Array                     | 駅間の標準所要時間リスト                                                              | ◯
-                                        | odpt:fromStation                   | odpt:Station              | 駅間の起点                                                                            | ◯
-                                        | odpt:toStation                     | odpt:Station              | 駅間の終点                                                                            | ◯
-                                        | odpt:necessaryTime                 | xsd:integer               | 駅間の所要時間（分）                                                                  | ◯
-odpt:lineCode                           |                                    | xsd:string                | 路線コードを格納                                                                      | ◯
-odpt:womenOnlyCar                       |                                    | Array(odpt:WomenOnlyCar)  | 女性専用車両情報のリスト                                                              |
-                                        | odpt:fromStation                   | odpt:Station              | 女性専用車両開始駅                                                                    |
-                                        | odpt:toStation                     | odpt:Station              | 女性専用車両終了駅                                                                    |
-                                        | odpt:operationDay                  | xsd:string                | 女性専用車両実施曜日                                                                  |
-                                        | odpt:availableTimeFrom             | odpt:Time                 | 女性専用車両開始時間                                                                  |
-                                        | odpt:availableTimeUntil            | odpt:Time                 | 女性専用車両終了時間                                                                  |
-                                        | odpt:carComposition                | xsd:integer               | 車両編成数                                                                            |
-                                        | odpt:carNumber                     | Array(xsd:integer)        | 女性専用車両実施車両号車番号                                                          |
 
 + Response 200 (application/json)
     + Body
@@ -597,22 +445,6 @@ odpt:womenOnlyCar                       |                                    | A
     + odpt%3AchildIcCardFare (optional, xsd:nteger       , `optional`) ... ICカード利用時の子供運賃
 
 ### Response [GET]
-#### Response Params
-
-Properties                   | 値域                    | 説明                                                                                                                           | 必須
----------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -----
-@context                     | URL                     | JSON-LD仕様に基づく @context のURL                                                                                             | ◯
-@id                          | URN                     | 固有識別子(ucode)                                                                                                              | ◯
-@type                        | odpt:RailwayFare        | 運賃を表すクラスのodpt:RailwayFare                                                                                             | ◯
-owl:sameAs                   | URL                     | 固有識別子。命名ルールはodpt.RailwayFare:TokyoMetro.出発駅の路線名.出発駅名.TokyoMetro.到着駅の路線名.到着駅名 である。        | ◯
-dc:date                      | xsd:dateTime            | データ生成日時（ISO8601 日付時刻形式）                                                                                         | ◯
-odpt:operator                | odpt:Operator           | 運行会社                                                                                                                       | ◯
-odpt:fromStation             | odpt:Station            | 駅間の始点駅                                                                                                                   | ◯
-odpt:toStation               | odpt:Station            | 駅間の終点駅                                                                                                                   | ◯
-odpt:ticketFare              | xsd:integer             | 切符利用時の運賃                                                                                                               | ◯
-odpt:childTicketFare         | xsd:string              | 切符利用時の子供運賃                                                                                                           | ◯
-odpt:icCardFare              | xsd:integer             | ICカード利用時の運賃                                                                                                           | ◯
-odpt:childIcCardFare         | xsd:nteger              | ICカード利用時の子供運賃                                                                                                       | ◯
 
 + Response 200 (application/json)
     + Body
@@ -660,19 +492,6 @@ odpt:childIcCardFare         | xsd:nteger              | ICカード利用時の
     + radius                 (required, xsd:double       , `500`) ...  検索範囲の半径(m) 
 
 ### Response [GET]
-#### Response Params
-
-Properties                   | 値域                    | 説明                                                                                                                           | 必須
----------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -----
-@context                     | URL                     | JSON-LD仕様に基づく @context のURL                                                                                             | ◯
-@id                          | URN                     | 固有識別子                                                                                                                     | ◯
-@type                        | rdf:type                | 地物のクラス名                                                                                                                 | ◯
-geo:long                     | xsd:double              | 代表点の経度、10進表記                                                                                                         | ◯
-geo:lat                      | xsd:double              | 代表点の緯度、10進表記                                                                                                         | ◯
-ug:region                    | odpt:GetDocument        | 地物の形状データをGeoJSONで取得するためのURL。取得にはアクセストークンの付与が必要。                                           |
-ug:floor                     | xsd:double              | 地物の階数（高さ情報）                                                                                                         | ◯
-dc:title                     | xsd:string              | 地物名。エレベータには「エレベータ」という文字列を含む。「出入口」の文字列の後に出口番号が続く。                               | ◯
-ugsrv:categoryName           | xsd:string              | 地物のカテゴリ（必ず「出入口」となる）                                                                                         | ◯
 
 + Response 200 (application/json)
     + Body
@@ -722,19 +541,6 @@ ugsrv:categoryName           | xsd:string              | 地物のカテゴリ�
     + radius                 (required, xsd:double       , `200`) ...  検索範囲の半径(m) 
 
 ### Response [GET]
-#### Response Params
-
-Properties                   | 値域                    | 説明                                                                                                                           | 必須
----------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -----
-@context                     | URL                     | JSON-LD仕様に基づく @context のURL                                                                                             | ◯
-@id                          | URN                     | 固有識別子                                                                                                                     | ◯
-@type                        | rdf:type                | 地物のクラス名                                                                                                                 | ◯
-geo:long                     | xsd:double              | 代表点の経度、10進表記                                                                                                         | ◯
-geo:lat                      | xsd:double              | 代表点の緯度、10進表記                                                                                                         | ◯
-ug:region                    | odpt:GetDocument        | 地物の形状データをGeoJSONで取得するためのURL。取得にはアクセストークンの付与が必要。                                           |
-ug:floor                     | xsd:double              | 地物の階数（高さ情報）                                                                                                         | ◯
-dc:title                     | xsd:string              | 地物名。エレベータには「エレベータ」という文字列を含む。「出入口」の文字列の後に出口番号が続く。                               | ◯
-ugsrv:categoryName           | xsd:string              | 地物のカテゴリ（必ず「出入口」となる）                                                                                         | ◯
 
 + Response 200 (application/json)
     + Body
@@ -788,18 +594,6 @@ ugsrv:categoryName           | xsd:string              | 地物のカテゴリ�
     + radius                 (required, xsd:double       , `200`) ...  検索範囲の半径(m)
 
 ### Response [GET]
-#### Response Params
-
-Properties                   | 値域                    | 説明                                                                                                                           | 必須
----------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -----
-@context                     | URL                     | JSON-LD仕様に基づく @context のURL                                                                                             | ◯
-@id                          | URN                     | 固有識別子                                                                                                                     | ◯
-@type                        | rdf:type                | 地物のクラス名、mlit:Railway                                                                                                   | ◯
-geo:long                     | xsd:double              | 代表点の経度、10進表記                                                                                                         | 
-geo:lat                      | xsd:double              | 代表点の緯度、10進表記                                                                                                         | 
-ug:region                    | odpt:GeoDocument        | 路線形状データをGeoJSONで取得するURL。取得にはアクセストークンの付与が必要。                                                   | 
-mlit:operatorName            | xsd:string              | 運営会社名                                                                                                                     | ◯
-mlit:railwayName             | xsd:string              | 路線名                                                                                                                         | ◯
 
 + Response 200 (application/json)
     + Body
