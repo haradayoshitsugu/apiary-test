@@ -1,491 +1,59 @@
 FORMAT: 1A
-HOST: https://api.tokyometroapp.jp/api/v2/
+HOST: http://prod.maihama.jp/api/v1/
 
-# Hello Tokyo API
+# maihama API
 ## このドキュメントについて
-- 東京メトロが公開しているオープンデータAPIを個人的にまとめたものです。
-- [オープンデータ活用コンテスト](http://tokyometro10th.jp/future/opendata/index.html)参加者が参照することを想定しています
-- `API Blueprints`で記述され、[apiary.io](http://apiary.io/)によって、ホスティングされています
-- [元データ](https://github.com/syotaro/TokyoMetroOpendataAPI/blob/master/apiary.apib)は、github上に保存されています[markdownでプレビューする](https://github.com/syotaro/TokyoMetroOpendataAPI/blob/master/apiary.md)と見やすいです
+- アプリからコールされる web api です。
 
-
-## このドキュメントから得られる情報
-以下を得ることができます
-
-- APIの詳細な仕様
-  - Request Parameters
-  - Response Parameters
-  - Sample Response
-- 本番APIに対してリクエストを発行及び結果の取得
-- APIからデータを取得する為のコードスニペットを発行する。スニペットの形式は、12の言語、形式(JavaScript,Raw,cURL,Node.js,Python,PHP,Ruby,C#,Visual,Groovy,Objective-C,Swift)に対応する
-
-## 本番APIへのリクエスト発行手順
-
-- 以下、駅時刻表を取得する例
-- 「xxxxxxxxxxxxxxxxxxx」の部分には、自身のアクセストークンを記入する
-
-![](http://s3img.jp/20140921151100.png)
-
-
-# Group メトロデータ取得・検索API
-
-## 駅時刻表 [/datapoints?rdf:type=odpt:StationTimetable&acl%3AconsumerKey={acl%3AconsumerKey}&odpt:station={odpt%3Astation}]
-各駅の平日、土曜、休日の列車着時刻、発車時刻と種別を表す。
-
-+ Parameters
-    + rdf%3Atype                    (required, odpt:StationTimetable, `odpt:StationTimetable`) ... クラス指定
-    + acl%3AconsumerKey             (required, acl:ConsumerKey      , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                         (optional, URN                  , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs                  (optional, URL                  , `optional`) ... 固有識別子。命名ルールは、odpt.StationTimetable:TokyoMetro.路線名.駅名.方面名 である。
-    + odpt%3Astation                (optional, odpt:Station         , `odpt.Station:TokyoMetro.Hanzomon.OmoteSando`) ... 駅
-    + odpt%3Arailway                (optional, odpt:Railway         , `optional`) ... 路線
-    + odpt%3Aoperator               (optional, odpt:Operator        , `optional`) ... 運行会社
-    + odpt%3ArailDirection          (optional, odpt:RailDirection   , `optional`) ... 方面
-
+## カテゴリー一覧取得 [/v1/category/list]
+有効なカテゴリー一覧をオーダーID昇順で返却します
 
 ### Response [GET]
 
 + Response 200 (application/json)
+
     + Body
 
-            [
-              {
-                "@id": "urn:ucode:_00001C000000000000010000030C3D7E",
-                "@type": "odpt:StationTimetable",
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_StationTimetable.jsonld",
-                "owl:sameAs": "odpt.StationTimetable:TokyoMetro.Tozai.Otemachi.Nakano",
-                "odpt:station": "odpt.Station:TokyoMetro.Tozai.Otemachi",
-                "odpt:railway": "odpt.Railway:TokyoMetro.Tozai",
-                "odpt:operator": "odpt.Operator:TokyoMetro",
-                "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Nakano",
-                "dc:date": "2014-08-25T21:16:03+09:00",
-                "odpt:weekdays": [
-                  {
-                    "odpt:departureTime": "05:09",
-                    "odpt:destinationStation": "odpt.Station:TokyoMetro.Tozai.Nakano",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  {
-                    "odpt:departureTime": "05:18",
-                    "odpt:destinationStation": "odpt.Station:TokyoMetro.Tozai.Nakano",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  {
-                    "odpt:departureTime": "05:30",
-                    "odpt:destinationStation": "odpt.Station:TokyoMetro.Tozai.Nakano",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  {
-                    "odpt:departureTime": "05:36",
-                    "odpt:destinationStation": "odpt.Station:TokyoMetro.Tozai.Nakano",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  {
-                    "odpt:departureTime": "05:48",
-                    "odpt:destinationStation": "odpt.Station:TokyoMetro.Tozai.Nakano",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  {
-                    "odpt:departureTime": "05:44",
-                    "odpt:destinationStation": "odpt.Station:JR-East.Chuo.Mitaka",
-                    "odpt:trainType": "odpt.TrainType:TokyoMetro.Local"
-                  },
-                  "odpt:saturdays": [],
-                  "odpt:holidays": []
+            {
+                "code": 200,
+                "contents": [
+                    {
+                        "_id": "000000000000000000000007",
+                        "name": "for FindAllPublishedCategories",
+                        "order_id": 0,
+                        "published": true,
+                        "deleted": false,
+                        "created_at": 0,
+                        "updated_at": 0
+                    },
+                    {
+                        "_id": "000000000000000000000009",
+                        "name": "for FindAllPublishedCategories(this is will be hit)",
+                        "order_id": 0,
+                        "published": true,
+                        "deleted": false,
+                        "created_at": 0,
+                        "updated_at": 0
+                    },
+                    {
+                        "_id": "000000000000000000000016",
+                        "name": "for FindAllPublishedCategories(this is will be hit)",
+                        "order_id": 0,
+                        "published": true,
+                        "deleted": false,
+                        "created_at": 0,
+                        "updated_at": 0
+                    },
+                    {
+                        "_id": "000000000000000000000008",
+                        "name": "for FindAllPublishedCategories",
+                        "order_id": 1,
+                        "published": true,
+                        "deleted": false,
+                        "created_at": 0,
+                        "updated_at": 0
+                    }
                 ]
-              }
-            ]
+            }
 
-## 列車運行情報 [/datapoints?rdf:type=odpt:TrainInformation&acl%3AconsumerKey={acl%3AconsumerKey}]
-列車運行情報を示す。基本的に発生時刻、発生箇所、現在状況を示す。平常運転時でも「平常」などの文字列を含んだ文字列を返す。 平常時かそれ以外かは、odpt:trainInformationStatus プロパティの存在有無で判定可能である。
-
-+ Parameters
-    + rdf%3Atype                    (required, odpt:TrainInformation, `odpt:TrainInformation`) ... クラス指定
-    + acl%3AconsumerKey             (required, acl:ConsumerKey      , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                         (optional, URN                  , `optional`) ... 固有識別子(ucode)
-    + odpt%3Aoperator               (optional, odpt:Operator        , `optional`) ... 運行会社
-    + odpt%3Arailway                (optional, odpt:Railway         , `optional`) ... 発生路線
-    + odpt%3AtrainInformationStatus (optional, xsd:string           , `optional`) ... 平常時は省略。運行情報が存在する場合は「運行情報あり」を格納。遅延などの情報を取得可能な場合は、「遅延」等のテキストを格納。
-    + odpt%3AtrainInformationText   (optional, xsd:string           , `optional`) ... 運行情報テキスト
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_train.jsonld",
-                "@type": "odpt:Train",
-                "@id": "urn:ucode:_00001C000000000000010000030CA20F",
-                "dc:date": "2014-09-20T23:27:45+09:00",
-                "dct:valid": "2014-09-20T23:29:15+09:00",
-                "odpt:frequency": 90,
-                "odpt:railway": "odpt.Railway:TokyoMetro.Marunouchi",
-                "owl:sameAs": "odpt.Train:TokyoMetro.Marunouchi.A2311",
-                "odpt:trainNumber": "A2311",
-                "odpt:trainType": "odpt.TrainType:TokyoMetro.Local",
-                "odpt:delay": 0,
-                "odpt:startingStation": "odpt.Station:TokyoMetro.Marunouchi.Ikebukuro",
-                "odpt:terminalStation": "odpt.Station:TokyoMetro.Marunouchi.Ogikubo",
-                "odpt:fromStation": "odpt.Station:TokyoMetro.Marunouchi.Ikebukuro",
-                "odpt:toStation": "odpt.Station:TokyoMetro.Marunouchi.ShinOtsuka",
-                "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Ogikubo",
-                "odpt:trainOwner": "odpt.TrainOwner:TokyoMetro"
-              }
-            ]
-
-
-## 列車ロケーション情報 [/datapoints?rdf:type=odpt:Train&acl%3AconsumerKey={acl%3AconsumerKey}]
-列車の在線位置を表す。列車ロケーション情報は、駅にいる状態（odpt:fromStation のみ値が存在）、「駅間を走行中」という状態（odpt:fromStation, odpt:toStation の両方に値が存在）を用いた相対位置情報表記に対応する。
-
-列車ロケーション情報は、始発から終電まで、列車が運行している時間帯に取得可能である。
-
-始発駅や終着駅には、東京メトロ以外の駅名が出現する場合があるが、他社の駅時刻表や駅情報等は提供しない。
-
-+ Parameters
-    + rdf%3Atype                    (required, odpt:TrainInformation, `odpt:TrainInformation`) ... クラス指定
-    + acl%3AconsumerKey             (required, acl:ConsumerKey      , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                           (optional, URN                  ,  `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs                  (optional, URL                  ,  `optional`) ... 固有識別子。命名ルールは、odpt.Train:TokyoMetro.路線名.列車番号である。
-    + odpt%3AtrainNumber            (optional, xsd:string           ,  `optional`) ... 列車番号
-    + odpt%3AtrainType              (optional, odpt:TrainType       ,  `optional`) ... 列車種別。各停(odpt.TrainType:Local)、急行(odpt.TrainType:Express)、快速(odpt.TrainType:Rapid)、特急(odpt.TrainType:LimitedExpress)など。
-    + odpt%3Arailway                (required, odpt:Railway         ,  `odpt.Railway:TokyoMetro.Chiyoda`) ... 鉄道路線
-    + odpt%3AtrainOwner             (optional, odpt:TrainOwner      ,  `optional`) ... 車両の所属会社
-    + odpt%3ArailDirection          (optional, odpt:RailDirection   ,  `optional`) ... 方面（渋谷方面行きodpt.RailDirection:TokyoMetro.Shibuyaなど。）
-    + odpt%3Adelay                  (optional, xsd:integer          ,  `optional`) ... 遅延時間（秒）
-    + odpt%3AstartingStation        (optional, odpt:Station         ,  `optional`) ... 列車の始発駅
-    + odpt%3AterminalStation        (optional, odpt:Station         ,  `optional`) ... 列車の終着駅
-    + odpt%3AfromStation            (optional, odpt:Station         ,  `optional`) ... 列車が出発した駅
-    + odpt%3AtoStation              (optional, odpt:Station         ,  `optional`) ... 列車が向かっている駅
-
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_train.jsonld",
-                "@type": "odpt:Train",
-                "@id": "urn:ucode:_00001C000000000000010000030C4D61",
-                "dc:date": "2014-09-08T20:53:51+09:00",
-                "dct:valid": "2014-09-08T20:54:51+09:00",
-                "odpt:frequency": 60,
-                "odpt:railway": "odpt.Railway:TokyoMetro.Chiyoda",
-                "owl:sameAs": "odpt.Train:TokyoMetro.Chiyoda.A2098S4",
-                "odpt:trainNumber": "A2098S4",
-                "odpt:trainType": "odpt.TrainType:TokyoMetro.Local",
-                "odpt:delay": 0,
-                "odpt:startingStation": "odpt.Station:TokyoMetro.Chiyoda.KitaAyase",
-                "odpt:terminalStation": "odpt.Station:TokyoMetro.Chiyoda.Ayase",
-                "odpt:fromStation": "odpt.Station:TokyoMetro.Chiyoda.KitaAyase",
-                "odpt:toStation": null,
-                "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Ayase",
-                "odpt:trainOwner": "odpt.TrainOwner:TokyoMetro"
-              },
-              {
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_train.jsonld",
-                "@type": "odpt:Train",
-                "@id": "urn:ucode:_00001C000000000000010000030C4D65",
-                "dc:date": "2014-09-08T20:53:51+09:00",
-                "dct:valid": "2014-09-08T20:54:51+09:00",
-                "odpt:frequency": 60,
-                "odpt:railway": "odpt.Railway:TokyoMetro.Chiyoda",
-                "owl:sameAs": "odpt.Train:TokyoMetro.Chiyoda.A2029K",
-                "odpt:trainNumber": "A2029K",
-                "odpt:trainType": "odpt.TrainType:TokyoMetro.Local",
-                "odpt:delay": 0,
-                "odpt:startingStation": "odpt.Station:JR-East.Joban.Abiko",
-                "odpt:terminalStation": "odpt.Station:TokyoMetro.Chiyoda.YoyogiUehara",
-                "odpt:fromStation": "odpt.Station:TokyoMetro.Chiyoda.Yushima",
-                "odpt:toStation": null,
-                "odpt:railDirection": "odpt.RailDirection:TokyoMetro.YoyogiUehara",
-                "odpt:trainOwner": "odpt.TrainOwner:JR-East"
-              }
-            ]
-
-## 駅情報 [/datapoints?rdf:type=odpt:Station&acl%3AconsumerKey={acl%3AconsumerKey}]
-駅情報 odpt:Stationは、駅の情報を示す。この情報は国土交通省国土数値情報を元に、 施設情報や乗り換え路線などを加筆・修正したものとなる。
-
-+ Parameters
-    + rdf%3Atype         (required, odpt:Station    , `odpt:Station`) ... クラス指定
-    + acl%3AconsumerKey  (required, acl:ConsumerKey , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + @id                (optional, URN             , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs       (URL                       , `optional`) ... 固有識別子。命名ルールは、odpt.Station:TokyoMetro.路線名.駅名である。
-    + dc%3Atitle         (xsd:string                , `optional`) ... 駅名
-    + odpt%3Aoperator    (odpt:Operator             , `optional`) ... 運行会社
-    + odpt%3Arailway     (odpt:Railway              , `optional`) ... 路線
-    + odpt%3AstationCode (xsd:string                , `optional`) ... 駅コード
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@id": "urn:ucode:_00001C000000000000010000030C46CD",
-                "@type": "odpt.Station",
-                "owl:sameAs": "odpt.Station:TokyoMetro.Hibiya.Ueno",
-                "dc:date": "2014-09-03T11:39:51+09:00",
-                "dc:title": "上野",
-                "ug:region": "https://api.tokyometroapp.jp/api/v2/places/urn:ucode:_00001C000000000000010000030C46CD.geojson",
-                "odpt:operator": "odpt.Operator:TokyoMetro",
-                "odpt:railway": "odpt.Railway:TokyoMetro.Hibiya",
-                "odpt:connectingRailway": [
-                  "odpt.Railway:JR-East.Yamanote",
-                  "odpt.Railway:JR-East.Utsunomiya",
-                  "odpt.Railway:JR-East.Joban",
-                  "odpt.Railway:JR-East.Takasaki",
-                  "odpt.Railway:JR-East.KeihinTohoku",
-                  "odpt.Railway:TokyoMetro.Ginza",
-                  "odpt.Railway:Keisei.KeiseiMain"
-                ],
-                "odpt:facility": "odpt.StationFacility:TokyoMetro.Ueno",
-                "odpt:passengerSurvey": [
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2013",
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2012",
-                  "odpt.PassengerSurvey:TokyoMetro.Ueno.2011"
-                ],
-                "odpt:stationCode": "H17",
-                "odpt:exit": [
-                  "urn:ucode:_00001C000000000000010000030C40B4",
-                  "urn:ucode:_00001C000000000000010000030C40B5",
-                  "urn:ucode:_00001C000000000000010000030C41F9",
-                  "urn:ucode:_00001C000000000000010000030C41FA",
-                  "urn:ucode:_00001C000000000000010000030C41FB",
-                  "urn:ucode:_00001C000000000000010000030C41FC",
-                  "urn:ucode:_00001C000000000000010000030C41FD",
-                  "urn:ucode:_00001C000000000000010000030C41FE",
-                  "urn:ucode:_00001C000000000000010000030C4466",
-                  "urn:ucode:_00001C000000000000010000030C4467",
-                  "urn:ucode:_00001C000000000000010000030C4468",
-                  "urn:ucode:_00001C000000000000010000030C4469",
-                  "urn:ucode:_00001C000000000000010000030C446A",
-                  "urn:ucode:_00001C000000000000010000030C446B",
-                ],
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_Station.jsonld"
-              }
-            ]
-
-
-
-
-## 駅情報追加 [/datapoints/add]
-### Response [POST]
-
-+ Parameters
-    + rdf%3Atype         (required, odpt:Station    , `odpt:Station`) ... クラス指定
-    + acl%3AconsumerKey  (required, acl:ConsumerKey , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + @id                (optional, URN             , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs       (URL                       , `optional`) ... 固有識別子。命名ルールは、odpt.Station:TokyoMetro.路線名.駅名である。
-    + dc%3Atitle         (xsd:string                , `optional`) ... 駅名
-    + odpt%3Aoperator    (odpt:Operator             , `optional`) ... 運行会社
-    + odpt%3Arailway     (odpt:Railway              , `optional`) ... 路線
-    + odpt%3AstationCode (xsd:string                , `optional`) ... 駅コード
-    
-
-
-+ Response 201 (application/json)
-
-        { "id": 9999}
-        
-
-## 駅施設情報 [/datapoints?rdf:type=odpt:StationFacility&acl%3AconsumerKey={acl%3AconsumerKey}]
-駅の施設に関する情報を記述する。
-
-+ Parameters
-    + rdf%3Atype                    (required, odpt:TrainInformation, `odpt:TrainInformation`) ... クラス指定
-    + acl%3AconsumerKey             (required, acl:ConsumerKey      , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                           (optional, URN                  , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs                  (optional, URL                  , `optional`) ... 固有識別子。命名ルールは、odpt.StationFacility:TokyoMetro.駅名 である。
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_StationFacility.jsonld",
-                "@id": "urn:ucode:_00001C000000000000010000030C478A",
-                "@type": "odpt:StationFacility",
-                "owl:sameAs": "odpt.StationFacility:TokyoMetro.KokkaiGijidomae",
-                "odpt:barrierfreeFacility": [
-                  {
-                    "@id": "urn:ucode:_00001C000000000000010000030C493E",
-                    "@type": "ug:Elevator",
-                    "owl:sameAs": "odpt.StationFacility:TokyoMetro.Marunouchi.KokkaiGijidomae.Inside.Elevator.1",
-                    "ugsrv:categoryName": "エレベーター",
-                    "odpt:placeName": "１番線、２番線ホーム（第2車両付近）～国会議事堂方面改札",
-                    "odpt:locatedAreaName": "改札内",
-                  },
-                  {
-                    "@id": "urn:ucode:_00001C000000000000010000030C4942",
-                    "@type": "ug:Escalator",
-                    "owl:sameAs": "odpt.StationFacility:TokyoMetro.Marunouchi.KokkaiGijidomae.Outside.Escalator.1",
-                    "ugsrv:categoryName": "エスカレーター",
-                    "odpt:serviceDetail": [
-                      {
-                        "odpt:operationDay": "平日",
-                        "ugsrv:serviceStartTime": "始発",
-                        "ugsrv:serviceEndTime": "17:00",
-                        "ug:direction": "上り"
-                      },
-                      {
-                        "odpt:operationDay": "平日",
-                        "ugsrv:serviceStartTime": "17:00",
-                        "ugsrv:serviceEndTime": "終車時",
-                        "ug:direction": "下り"
-                      },
-                      {
-                        "odpt:operationDay": "土日祝",
-                        "ug:direction": "上り"
-                      }
-                    ],
-                    "odpt:placeName": "国会議事堂方面改札～１番出入口",
-                    "odpt:locatedAreaName": "改札外",
-                  },
-                  {
-                    "@id": "urn:ucode:_00001C000000000000010000030C4943",
-                    "@type": "ug:Toilet",
-                    "owl:sameAs": "odpt.StationFacility:TokyoMetro.Marunouchi.KokkaiGijidomae.Outside.Toilet.1",
-                    "ugsrv:categoryName": "トイレ",
-                    "odpt:placeName": "国会議事堂方面改札外",
-                    "odpt:locatedAreaName": "改札外",
-                    "spac:hasAssistant": [
-                      "spac:WheelchairAssesible",
-                      "ug:BabyChair",
-                      "ug:BabyChangingTable",
-                      "ug:ToiletForOstomate"
-                    ],
-                  },
-                  {
-                    "@id": "urn:ucode:_00001C000000000000010000030C4944",
-                    "@type": "ug:Link",
-                    "owl:sameAs": "odpt.StationFacility:TokyoMetro.Marunouchi.KokkaiGijidomae.Outside.AccessibleRoute.1",
-                    "ugsrv:categoryName": "ハンドル型電動車いす利用可能経路",
-                    "odpt:locatedAreaName": "改札外",
-                    "spac:isAvailableTo": "spac:MobilityScooter",
-                    "ugsrv:remark": "国会議事堂横2番出入口エレベーターで改札階へお越しください。千代田線の利用および乗り
-            換えも可能です。",
-                  },
-                "odpt:platformInformation": [
-                  {
-                    "odpt:carComposition": 6,
-                    "odpt:carNumber": 1,
-                    "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Ikebukuro"
-                  },
-                  {
-                    "odpt:carComposition": 6,
-                    "odpt:carNumber": 3,
-                    "odpt:railDirection": "odpt.RailDirection:TokyoMetro.Ikebukuro",
-                    "odpt:transferInformation": [
-                      {
-                        "odpt:railway": "odpt.Railway:TokyoMetro.Ginza",
-                        "odpt:necessaryTime": 13
-                      },
-                      {
-                        "odpt:railway": "odpt.Railway:TokyoMetro.Chiyoda",
-                        "odpt:necessaryTime": 4
-                      },
-                      {
-                        "odpt:railway": "odpt.Railway:TokyoMetro.Namboku",
-                        "odpt:necessaryTime": 10
-                      }
-                    ],
-                    "odpt:barrierfreeFacility": [
-                      "odpt.StationFacility:TokyoMetro.Marunouchi.KokkaiGijidomae.Outside.Toilet.1"
-                    ],
-                    "odpt:surroundingArea": [
-                      "国会議事堂"
-                    ]
-                  }
-                ]
-              }
-            ]
-
-## 駅乗降人員数 [/datapoints?rdf:type=odpt:PassengerSurvey&acl%3AconsumerKey={acl%3AconsumerKey}]
-
-+ Parameters
-    + rdf%3Atype                    (required, odpt:PassengerSurvey , `odpt:PassengerSurvey`) ... クラス指定
-    + acl%3AconsumerKey             (required, acl:ConsumerKey      , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                           (optional, URN                  , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs                  (optional, URL                  , `optional`) ... 固有識別子。 命名ルールはodpt.PassengerSurvey:TokyoMetro.駅名.調査年 である。e.g. odpt:PassengerSurvey:TokyoMetro.Tokyo.2013
-    + odpt%3Aoperator               (optional, odpt:Operator        , `optional`) ... 運行会社
-    + odpt%3AsurveyYear             (optional, xsd:integer          , `optional`) ... 調査年度
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@id": "urn:ucode:_00001C000000000000010000030C4504",
-                "@type": "odpt:PassengerSurvey",
-                "owl:sameAs": "odpt.PassengerSurvey:TokyoMetro.Ueno.2013",
-                "odpt:operator": "odpt.Operator:TokyoMetro",
-                "odpt:surveyYear": 2013,
-                "odpt:passengerJourneys": 211539,
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_PassengerSurvey.jsonld"
-              }
-            ]
-
-## 鉄道路線情報 [/datapoints?rdf:type=odpt:Railway&acl%3AconsumerKey={acl%3AconsumerKey}]
-路線情報 odpt:Railwayは、鉄道路線の情報を示す。 運行系統名、駅間所要時間、駅間順序などを加筆・修正したものとなる。
-
-+ Parameters
-    + rdf%3Atype        (required, odpt:Railway     , `odpt:Railway`) ... クラス指定
-    + acl%3AconsumerKey (required, acl:ConsumerKey  , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id               (optional, URN              , `optional`) ... 固有識別子(ucode)支線には別IDを割り当てる
-    + owl%3AsameAs      (optional, URL              , `optional`) ... 固有識別子。命名ルールは、odpt.Railway:TokyoMetro.路線名 である。
-    + dc%3Atitle        (optional, xsd:string       , `optional`) ... 運行系統名
-    + odpt%3Aoperator   (optional, odpt:Operator    , `optional`) ... 運行会社
-    + odpt%3AlineCode   (optional, xsd:string       , `optional`) ... 路線コード
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-## 運賃 [/datapoints?rdf:type=odpt:RailwayFare&acl%3AconsumerKey={acl%3AconsumerKey}&odpt:fromStation={odpt%3AfromStation}&odpt:toStation={odpt%3AtoStation}]
-2駅間の運賃を表す。
-
-+ Parameters
-    + rdf%3Atype             (required, odpt:RailwayFare , `odpt:RailwayFare`) ... クラス指定
-    + acl%3AconsumerKey      (required, acl:ConsumerKey  , `xxxxxxxxxxxxxxxxxxx`) ... APIアクセス用のアクセストークン
-    + %40id                  (optional, URN              , `optional`) ... 固有識別子(ucode)
-    + owl%3AsameAs           (optional, URL              , `optional`) ... 固有識別子。命名ルールはodpt.RailwayFare:TokyoMetro.出発駅の路線名.出発駅名.TokyoMetro.到着駅の路線名.到着駅名 である。
-    + odpt%3Aoperator        (optional, odpt:Operator    , `optional`) ... 運行会社
-    + odpt%3AfromStation     (optional, odpt:Station     , `odpt.Station:TokyoMetro.Hanzomon.Shibuya`) ... 駅間の始点駅
-    + odpt%3AtoStation       (optional, odpt:Station     , `odpt.Station:TokyoMetro.Hanzomon.OmoteSando`) ... 駅間の終点駅
-    + odpt%3AticketFare      (optional, xsd:integer      , `optional`) ... 切符利用時の運賃
-    + odpt%3AchildTicketFare (optional, xsd:string       , `optional`) ... 切符利用時の子供運賃
-    + odpt%3AicCardFare      (optional, xsd:integer      , `optional`) ... ICカード利用時の運賃
-    + odpt%3AchildIcCardFare (optional, xsd:nteger       , `optional`) ... ICカード利用時の子供運賃
-
-### Response [GET]
-
-+ Response 200 (application/json)
-    + Body
-
-            [
-              {
-                "@id": "urn:ucode:_00001C000000000000010000030C934A",
-                "@type": "odpt:RailwayFare",
-                "owl:sameAs": "odpt.RailwayFare:TokyoMetro.Hanzomon.Shibuya.TokyoMetro.Hanzomon.OmoteSando",
-                "dc:date": "2014-08-29T16:03:36+09:00",
-                "odpt:operator": "odpt.Operator:TokyoMetro",
-                "odpt:fromStation": "odpt.Station:TokyoMetro.Hanzomon.Shibuya",
-                "odpt:toStation": "odpt.Station:TokyoMetro.Hanzomon.OmoteSando",
-                "odpt:ticketFare": 170,
-                "odpt:childTicketFare": 90,
-                "odpt:icCardFare": 165,
-                "odpt:childIcCardFare": 82,
-                "@context": "http://vocab.tokyometroapp.jp/context_odpt_RailwayFare.jsonld"
-              }
-            ]
 
