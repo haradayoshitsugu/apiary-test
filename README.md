@@ -1,4 +1,4 @@
-# 1．confファイル内のheaderの値を適宜置き換えてください
+### 1．confファイル内のheaderの値を適宜置き換えてください
 
 ```
 例．
@@ -7,7 +7,7 @@ bot_01.conf
  header=X-Parse-Object-Id:lSeOdWJdmy
 ```
 
-# 2．下記コマンドを実行してください
+### 2．下記コマンドを実行してください
 
 ```
 cd bot_01
