@@ -11,5 +11,5 @@ bot_01.conf
 
 ```
 cd bot_01
-curl --config event_put.conf
+curl --config bot_01.conf
 ```
